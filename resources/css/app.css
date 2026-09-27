@@ -1,0 +1,482 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    --color-glass-bg: rgba(255, 255, 255, 0.15);
+    --color-glass-border: rgba(255, 255, 255, 0.2);
+    --color-glass-shadow: rgba(0, 0, 0, 0.1);
+    
+    --color-emerald-50: #ecfdf5;
+    --color-emerald-100: #d1fae5;
+    --color-emerald-200: #a7f3d0;
+    --color-emerald-300: #6ee7b7;
+    --color-emerald-400: #34d399;
+    --color-emerald-500: #10b981;
+    --color-emerald-600: #059669;
+    --color-emerald-700: #047857;
+    --color-emerald-800: #065f46;
+    --color-emerald-900: #064e3b;
+    --color-emerald-950: #022c22;
+}
+
+/* Glassmorphic utilities */
+.glass {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: 0 8px 32px var(--color-glass-shadow);
+}
+
+.glass-strong {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.glass-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.glass-emerald {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+}
+
+.glass-emerald-strong {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.2) 100%);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
+}
+
+/* Animations */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+.animate-slide-in-right { animation: slide-in-right 0.5s ease-out forwards; }
+.animate-slide-in-left { animation: slide-in-left 0.5s ease-out forwards; }
+.animate-scale-in { animation: scale-in 0.3s ease-out forwards; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-shimmer { animation: shimmer 2s linear infinite; background-size: 200% 100%; }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-in-right,
+    .animate-slide-in-left,
+    .animate-scale-in,
+    .animate-pulse-glow,
+    .animate-shimmer {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Glass card component */
+.card-glass {
+    @apply glass rounded-2xl p-6 transition-all duration-300 hover:shadow-xl;
+}
+
+.card-glass-strong {
+    @apply glass-strong rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl;
+}
+
+.card-emerald {
+    @apply glass-emerald rounded-2xl p-6 transition-all duration-300 hover:shadow-xl;
+}
+
+.card-emerald-strong {
+    @apply glass-emerald-strong rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl;
+}
+
+/* Emerald gradient backgrounds */
+.bg-emerald-gradient {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+.bg-emerald-gradient-strong {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.bg-emerald-glass {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+}
+
+.bg-emerald-glass-strong {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.15) 100%);
+}
+
+/* Form elements with glassmorphism */
+.input-glass {
+    @apply glass rounded-xl px-4 py-3 border-emerald-300/50 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all duration-200;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.input-glass:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.select-glass {
+    @apply glass rounded-xl px-4 py-3 border-emerald-300/50 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all duration-200 appearance-none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.select-glass:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Button variants */
+.btn-glass {
+    @apply glass px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-lg active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2;
+}
+
+.btn-glass:hover {
+    @apply glass-strong;
+}
+
+.btn-emerald-glass {
+    @apply glass-emerald px-6 py-3 rounded-xl font-medium text-white transition-all duration-200 hover:shadow-lg active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2;
+}
+
+.btn-emerald-glass:hover {
+    @apply glass-emerald-strong;
+}
+
+.btn-emerald-solid {
+    @apply bg-emerald-600 px-6 py-3 rounded-xl font-medium text-white transition-all duration-200 hover:bg-emerald-700 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2;
+}
+
+.btn-glass-outline {
+    @apply glass border-emerald-400/50 px-6 py-3 rounded-xl font-medium text-emerald-700 transition-all duration-200 hover:bg-emerald-500/10 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2;
+}
+
+.btn-glass-outline:hover {
+    @apply bg-emerald-500/20;
+}
+
+.btn-glass-ghost {
+    @apply px-6 py-3 rounded-xl font-medium text-emerald-700 transition-all duration-200 hover:bg-emerald-500/10 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2;
+}
+
+.btn-glass-ghost:hover {
+    @apply bg-emerald-500/20;
+}
+
+/* Badge variants */
+.badge-glass {
+    @apply glass px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-emerald-glass {
+    @apply glass-emerald px-3 py-1 rounded-full text-xs font-medium text-white;
+}
+
+.badge-emerald-solid {
+    @apply bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-emerald-solid-light {
+    @apply bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-medium;
+}
+
+/* Table styles */
+.table-glass {
+    @apply w-full border-collapse;
+}
+
+.table-glass th {
+    @apply glass px-4 py-3 text-left text-xs font-semibold text-emerald-700 uppercase tracking-wider;
+}
+
+.table-glass td {
+    @apply px-4 py-3 text-sm text-gray-700;
+}
+
+.table-glass tbody tr {
+    @apply transition-colors duration-200;
+}
+
+.table-glass tbody tr:hover {
+    @apply bg-emerald-50/50;
+}
+
+.table-glass tbody tr:nth-child(even) {
+    @apply bg-white/50;
+}
+
+/* Sidebar glass */
+.sidebar-glass {
+    @apply glass-strong fixed inset-y-0 left-0 z-50 w-64 transition-all duration-300;
+}
+
+.sidebar-glass.collapsed {
+    @apply w-20;
+}
+
+/* Navbar glass */
+.navbar-glass {
+    @apply glass-strong sticky top-0 z-40;
+}
+
+/* Modal glass */
+.modal-glass {
+    @apply glass-strong fixed inset-0 z-50 flex items-center justify-center p-4;
+}
+
+.modal-glass-content {
+    @apply glass-strong rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto animate-scale-in;
+}
+
+/* Dropdown glass */
+.dropdown-glass {
+    @apply glass-strong absolute right-0 mt-2 w-56 rounded-xl py-2 shadow-xl animate-fade-in;
+}
+
+.dropdown-glass-item {
+    @apply px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50/50 transition-colors duration-150;
+}
+
+.dropdown-glass-item:hover {
+    @apply bg-emerald-50/50;
+}
+
+/* Alert glass */
+.alert-glass {
+    @apply glass rounded-xl p-4;
+}
+
+.alert-emerald-glass {
+    @apply glass-emerald p-4 text-white;
+}
+
+.alert-emerald-glass-success {
+    @apply glass-emerald p-4 text-white bg-emerald-500/20 border-emerald-400/50;
+}
+
+.alert-emerald-glass-error {
+    @apply glass-emerald p-4 text-white bg-red-500/20 border-red-400/50;
+}
+
+/* Progress bar */
+.progress-glass {
+    @apply glass h-2 rounded-full overflow-hidden;
+}
+
+.progress-glass-bar {
+    @apply h-full bg-emerald-500 rounded-full transition-all duration-300;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply glass;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply glass-emerald rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply glass-emerald-strong;
+}
+
+/* Focus visible */
+.focus-visible:focus-visible {
+    @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-white;
+}
+
+/* Loading spinner */
+.spinner-glass {
+    @apply animate-spin rounded-full border-4 border-emerald-200 border-t-emerald-500;
+}
+
+/* Tooltip */
+.tooltip-glass {
+    @apply glass-strong absolute z-50 px-3 py-1.5 rounded-lg text-sm text-white opacity-0 invisible transition-all duration-200;
+}
+
+.tooltip-glass.visible {
+    @apply opacity-100 visible;
+}
+
+/* Empty state */
+.empty-glass {
+    @apply glass p-12 text-center;
+}
+
+.empty-glass-icon {
+    @apply text-emerald-400/50 text-6xl mb-4;
+}
+
+.empty-glass-title {
+    @apply text-lg font-semibold text-emerald-800 mb-2;
+}
+
+.empty-glass-text {
+    @apply text-emerald-600;
+}
+
+/* Stats card */
+.stat-card {
+    @apply card-glass;
+}
+
+.stat-card-emerald {
+    @apply card-emerald;
+}
+
+.stat-value {
+    @apply text-3xl font-bold text-emerald-700;
+}
+
+.stat-label {
+    @apply text-sm text-emerald-600 mt-1;
+}
+
+/* Page transitions */
+.page-enter {
+    @apply animate-fade-in;
+}
+
+.page-leave {
+    @apply animate-fade-out;
+}
+
+/* Hover lift effect */
+.hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl;
+}
+
+/* Glass divider */
+.divider-glass {
+    @apply h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent;
+}
+
+/* Card hover glow */
+.card-glow:hover {
+    @apply animate-pulse-glow;
+}
+
+/* Shimmer loading */
+.skeleton-glass {
+    @apply glass animate-shimmer rounded-xl;
+}
+
+/* Page header */
+.page-header-glass {
+    @apply mb-8;
+}
+
+.page-title {
+    @apply text-2xl font-bold text-emerald-900;
+}
+
+.page-subtitle {
+    @apply text-emerald-600 mt-1;
+}
+
+/* Breadcrumb */
+.breadcrumb-glass {
+    @apply glass px-4 py-2 rounded-xl text-sm;
+}
+
+.breadcrumb-item {
+    @apply text-emerald-600 hover:text-emerald-800 transition-colors;
+}
+
+.breadcrumb-separator {
+    @apply text-emerald-300 mx-2;
+}
+
+/* Avatar */
+.avatar-glass {
+    @apply glass w-10 h-10 rounded-full flex items-center justify-center text-emerald-700 font-medium;
+}
+
+/* Toggle switch */
+.toggle-glass {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full glass transition-colors duration-200;
+}
+
+.toggle-glass input {
+    @apply sr-only;
+}
+
+.toggle-glass-thumb {
+    @apply h-4 w-4 rounded-full glass-strong transform transition-transform duration-200;
+}
+
+.toggle-glass input:checked + .toggle-glass-thumb {
+    @apply translate-x-6 bg-emerald-500;
+}
+
+/* Focus ring for glass elements */
+.focus-ring:focus {
+    @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-white;
+}
+
+/* Print styles */
+@media print {
+    .glass, .glass-strong, .glass-emerald, .glass-emerald-strong {
+        @apply bg-white border-gray-200 shadow-none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
